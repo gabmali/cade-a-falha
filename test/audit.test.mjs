@@ -8,6 +8,7 @@ import test from 'node:test';
 import { gzipSync } from 'node:zlib';
 import { audit } from '../lib/audit.mjs';
 import { fetchPage, isPublicIP, parseAddress } from '../lib/network.mjs';
+import { createPublicLimits } from '../lib/public-limits.mjs';
 
 const publicIp = '93.184.216.34';
 const host = 'fixture.cadeafalha.net';
@@ -28,6 +29,7 @@ function fixture(t, routes) {
         assert.deepEqual(records, [{ address: publicIp, family: 4 }]);
       });
       assert.equal(options.agent, false);
+      assert.equal(options.rejectUnauthorized, true);
       const [status, headers, body] = routes[url.pathname] ?? [404, {}, ''];
       const response = new PassThrough();
       response.statusCode = status;
@@ -201,4 +203,51 @@ test('orienta a investigar o servidor quando uma página ou link retorna HTTP 50
   assert.match(broken.action, /hospedagem/);
   const page = await audit(parseAddress(`https://${host}/erro`));
   assert.match(page.findings[0].action, /hospedagem/);
+});
+
+test('impede portas não padrão e o próprio serviço em endereços e redirecionamentos públicos', async (t) => {
+  const publicHostname = 'cade-a-falha.onrender.com';
+  const calls = fixture(t, {
+    '/porta': [302, { location: `https://${host}:8443/` }],
+    '/proprio': [302, { location: `https://${publicHostname}./` }],
+  });
+  assert.throws(() => parseAddress(`https://${host}:8443/`, publicHostname), /portas padrão/);
+  assert.throws(() => parseAddress(publicHostname, publicHostname), /outro site/);
+  assert.equal(parseAddress(`https://${host}:443/`, publicHostname).port, '');
+  for (const path of ['/porta', '/proprio']) {
+    const result = await fetchPage(parseAddress(`https://${host}${path}`), { publicHostname });
+    assert.match(result.reason, /redirecionamento foi bloqueado.*portas padrão/i);
+  }
+  assert.deepEqual(calls, [`https://${host}/porta`, `https://${host}/proprio`]);
+});
+
+test('limita análises por visitante, por instância e tentativas de saída por minuto', () => {
+  let time = 0;
+  const limits = createPublicLimits(() => time);
+  for (const ip of ['1.1.1.1', '8.8.8.8', '2606:4700::1111']) {
+    for (let count = 0; count < 4; count++) assert.equal(limits.admitAnalysis(ip), 0);
+    assert.equal(limits.admitAnalysis(ip), 60);
+  }
+  assert.equal(limits.admitAnalysis('9.9.9.9'), 60);
+  for (let count = 0; count < 80; count++) assert.equal(limits.takeAttempt(), true);
+  assert.equal(limits.takeAttempt(), false);
+  time = 59_999;
+  assert.equal(limits.admitAnalysis('9.9.9.9'), 1);
+  time = 60_000;
+  assert.equal(limits.admitAnalysis('1.1.1.1'), 0);
+  assert.equal(limits.takeAttempt(), true);
+});
+
+test('interrompe a amostra ao acabar o orçamento sem contar links que não foram testados', async (t) => {
+  const calls = fixture(t, {
+    '/': [200, { 'content-type': 'text/html' }, '<a href="/contato">Contato</a>'],
+  });
+  let budget = 1;
+  const report = await audit(parseAddress(host), undefined, {
+    publicHostname: 'cade-a-falha.onrender.com',
+    takeAttempt: () => budget-- > 0,
+  });
+  assert.equal(report.linksTested, 0);
+  assert.match(report.findings.find(({ destination }) => destination).observed, /limite de consultas externas/);
+  assert.deepEqual(calls, [`https://${host}/`]);
 });

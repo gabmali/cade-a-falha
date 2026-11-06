@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: cade-a-falha
+    runtime: node
+    plan: free
+    branch: main
+    buildCommand: pnpm install --frozen-lockfile --ignore-scripts && pnpm test
+    startCommand: node server.mjs
+    healthCheckPath: /healthz
+    autoDeployTrigger: 'off'
