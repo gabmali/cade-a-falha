@@ -1,0 +1,12 @@
+{
+  "name": "Cadê a Falha?",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:24-bookworm",
+  "forwardPorts": [4173],
+  "portsAttributes": {
+    "4173": {
+      "label": "Cadê a Falha?",
+      "onAutoForward": "silent"
+    }
+  },
+  "postCreateCommand": "npx --yes pnpm@11.25.0 install --frozen-lockfile --ignore-scripts && npm test"
+}

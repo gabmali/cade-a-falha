@@ -15,6 +15,16 @@ Abra [a prévia local](http://127.0.0.1:4173/). Com as dependências instaladas,
 
 ## Publicar a prévia
 
+### Teste público temporário no GitHub Codespaces
+
+1. [Crie um Codespace da branch `main`](https://codespaces.new/gabmali/cade-a-falha/tree/main) na sua conta GitHub. O ambiente prepara as dependências e executa os testes.
+2. No terminal do Codespace, execute `npm run preview:codespaces`. O servidor imprime o endereço HTTPS da prévia.
+3. Na aba **Ports**, abra o menu da porta **4173** e selecione **Port Visibility → Public**. Copie o endereço encaminhado e teste-o em uma janela anônima antes de compartilhar.
+
+O link pode ser aberto por qualquer pessoa enquanto a prévia e o Codespace estiverem ativos. Se o Codespace for suspenso, reinicie o servidor e confira a visibilidade da porta. Consulte a [cota de uso do GitHub Codespaces](https://docs.github.com/en/codespaces/troubleshooting/troubleshooting-included-usage) na sua conta.
+
+### Hospedagem no Render
+
 O [atalho para publicar no Render](https://render.com/deploy?repo=https://github.com/gabmali/cade-a-falha) usa o arquivo `render.yaml` da branch `main`. Entre no Render, confira o plano **Free** e crie o serviço. Quando o serviço estiver ativo, abra o endereço HTTPS `onrender.com` exibido no painel. O plano gratuito pode demorar para responder depois de um período sem acesso.
 
 O build instala as dependências pelo lockfile e executa os testes. Novos commits podem ser publicados pelo painel do Render. Antes de compartilhar o endereço, confira se `/healthz` responde, analise `example.com` e confirme que `http://127.0.0.1` é rejeitado.
