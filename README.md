@@ -1,6 +1,6 @@
 # Cadê a Falha?
 
-[**Abrir a prévia pública do Cadê a Falha?**](https://minolta-undo-tile-structure.trycloudflare.com/)
+[**Abrir a prévia pública do Cadê a Falha?**](https://inches-axis-tap-rich.trycloudflare.com/)
 
 A prévia é gratuita e abre sem login. O endereço funciona enquanto o computador que hospeda o site estiver ligado e o túnel estiver ativo.
 
