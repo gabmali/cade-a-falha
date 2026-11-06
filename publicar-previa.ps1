@@ -7,7 +7,7 @@ $repository = $PSScriptRoot
 $runtime = Join-Path $env:LOCALAPPDATA 'CadeAFalha\quick-tunnel'
 $stateFile = Join-Path $runtime 'active.json'
 $cloudflared = Join-Path $runtime 'cloudflared-2026.10.7.exe'
-$cloudflaredHash = '76b2805253d0d6ffacb092a7acfbee99e7af6917835c0c5410e23f3ef5052da2'
+$cloudflaredHash = '2493dbc168923bb3e59e5e7716f71deced92992eea9acd6e9d74f84ac7751343'
 $expectedRemote = 'https://github.com/gabmali/cade-a-falha.git'
 $urlPattern = 'https://[a-z0-9-]+\.trycloudflare\.com'
 $readmePattern = '(?m)^(\[\*\*Abrir a prévia pública do Cadê a Falha\?\*\*\]\()' + $urlPattern + '/?(\))(?=\r?$)'
