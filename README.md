@@ -1,5 +1,9 @@
 # Cadê a Falha?
 
+[**Abrir a prévia pública do Cadê a Falha?**](https://minolta-undo-tile-structure.trycloudflare.com/)
+
+A prévia é gratuita e abre sem login. O endereço funciona enquanto o computador que hospeda o site estiver ligado e o túnel estiver ativo.
+
 Diagnóstico de páginas públicas em português do Brasil. A interface roda no navegador e envia o endereço ao servidor pela rota `POST /api/analisar`.
 
 ## Iniciar a prévia
