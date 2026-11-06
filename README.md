@@ -19,6 +19,16 @@ Abra [a prévia local](http://127.0.0.1:4173/). Com as dependências instaladas,
 
 ## Publicar a prévia
 
+### Reabrir a prévia pública no Windows
+
+No terminal do Codex, na pasta do projeto, execute:
+
+```powershell
+pwsh -NoProfile -File .\publicar-previa.ps1
+```
+
+O comando inicia ou reaproveita o túnel, testa o analisador pelo link público e atualiza este README usando a credencial do Git já salva. O computador, o servidor e o túnel precisam permanecer ativos para manter o link disponível.
+
 ### Teste público temporário no GitHub Codespaces
 
 1. [Crie um Codespace da branch `main`](https://codespaces.new/gabmali/cade-a-falha/tree/main) na sua conta GitHub. O ambiente prepara as dependências e executa os testes.
