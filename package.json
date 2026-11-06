@@ -1,0 +1,16 @@
+{
+  "name": "cade-a-falha",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "html-encoding-sniffer": "4.0.0",
+    "parse5": "7.3.0"
+  }
+}

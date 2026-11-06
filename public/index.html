@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Descubra problemas no seu site e receba instruções para corrigi-los.">
+  <meta name="theme-color" content="#111827">
+  <title>Cadê a Falha? — Diagnóstico de sites</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" type="module"></script>
+</head>
+<body>
+  <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.75" cy="10.75" r="6.25"/><path d="m15.5 15.5 4.25 4.25"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h14m-5.5-5.5 5.5 5.5-5.5 5.5"/></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M2.5 12h4l3-7 4.5 14 3-7h4.5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3m-4 4v2"/></symbol>
+    <symbol id="i-type" viewBox="0 0 24 24"><path d="M4 7V5h16v2M12 5v14m-4 0h8"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="m10 14 4-4m-6.5 6.5-1 1a3 3 0 0 1-4.25-4.25l4-4a3 3 0 0 1 4.25 0m3 5.5a3 3 0 0 0 4.25 0l4-4A3 3 0 0 0 17.5 6.5l-1 1"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5m0 3.5h.01"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 5v5h-5M4 19v-5h5m-4.4-5a8 8 0 0 1 13.3-3.6L20 10M4 14l2.1 4.6A8 8 0 0 0 19.4 15"/></symbol>
+  </svg>
+
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="/" aria-label="Cadê a Falha? Início">
+        <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></span>
+        <span>Cadê a Falha<span class="accent">?</span></span>
+      </a>
+      <span class="version"><span></span> VERSÃO 01</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow mode"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg> MODO DETETIVE</p>
+        <h1 id="hero-title">Cadê a Falha<span>?</span></h1>
+        <p class="intro">Cole o link do seu site para descobrir o que está falhando e como corrigir.</p>
+
+        <form id="audit-form" class="audit-form" novalidate>
+          <label for="address">Endereço do seu site</label>
+          <div class="form-row">
+            <div class="input-wrap">
+              <svg class="icon" aria-hidden="true"><use href="#i-link"/></svg>
+              <input id="address" name="address" type="text" inputmode="url" placeholder="https://seusite.com.br" autocomplete="url" autocapitalize="none" spellcheck="false" required aria-describedby="form-hint">
+            </div>
+            <button id="submit" class="button button-primary" type="submit">
+              <span>Analisar meu site</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </button>
+          </div>
+          <p id="form-hint" class="form-hint"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg> Use um endereço público. Nenhuma alteração é feita no seu site.</p>
+          <p id="form-error" class="form-error" role="alert" hidden></p>
+        </form>
+      </div>
+      <img class="radar" src="/detetive.svg" width="440" height="350" alt="">
+    </section>
+
+    <div class="shell">
+      <span id="audit-status" class="visually-hidden" role="status"></span>
+      <div id="loading" class="loading" hidden>
+        <span class="spinner" aria-hidden="true"></span>
+        <div><strong>Analisando seu site…</strong><p>Verificando a página e uma amostra dos links internos.</p></div>
+      </div>
+      <section id="report" class="report" aria-labelledby="report-title" hidden></section>
+    </div>
+
+    <section id="checks" class="checks shell" aria-labelledby="checks-title">
+      <div class="section-title">
+        <p class="eyebrow"><span></span> AS PISTAS</p>
+        <h2 id="checks-title">O que a gente investiga</h2>
+      </div>
+      <ul class="check-grid">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-pulse"/></svg><h3>Disponibilidade</h3><p>Se a página abre.</p></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg><h3>HTTPS</h3><p>Se a conexão é segura.</p></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-type"/></svg><h3>Título da página</h3><p>Se a aba tem um título.</p></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><h3>Configuração mobile</h3><p>Se a largura da tela é declarada.</p></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg><h3>Links internos</h3><p>Se até 10 destinos abrem.</p></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="shell footer">
+    <span><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg> Cadê a Falha?</span>
+    <span>Diagnóstico de páginas públicas</span>
+  </footer>
+</body>
+</html>

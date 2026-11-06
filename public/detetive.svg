@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 350" fill="none">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" stroke="#6EE7B7" stroke-opacity=".11"/></pattern>
+    <radialGradient id="fade"><stop stop-color="#fff"/><stop offset=".62" stop-color="#fff" stop-opacity=".72"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="aura"><stop stop-color="#164539" stop-opacity=".76"/><stop offset="1" stop-color="#164539" stop-opacity="0"/></radialGradient>
+    <linearGradient id="sweep" x1="214" y1="174" x2="338" y2="91" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6EE7B7" stop-opacity=".02"/><stop offset="1" stop-color="#6EE7B7" stop-opacity=".29"/>
+    </linearGradient>
+    <linearGradient id="lens" x1="170" y1="113" x2="256" y2="245" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1c4a40"/><stop offset="1" stop-color="#122b2d"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="170" y1="127" x2="252" y2="242" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#99f6d1"/><stop offset="1" stop-color="#36a683"/>
+    </linearGradient>
+    <mask id="mask"><ellipse cx="219" cy="175" rx="218" ry="175" fill="url(#fade)"/></mask>
+  </defs>
+  <ellipse cx="224" cy="176" rx="202" ry="163" fill="url(#aura)"/>
+  <path fill="url(#grid)" mask="url(#mask)" d="M0 0h440v350H0z"/>
+  <g stroke="#6EE7B7" stroke-opacity=".26">
+    <circle cx="215" cy="173" r="135" stroke-dasharray="2 6"/>
+    <circle cx="215" cy="173" r="117"/>
+    <circle cx="215" cy="173" r="90"/>
+    <circle cx="215" cy="173" r="59" stroke-opacity=".2"/>
+    <path d="M215 25v296M66 173h298" stroke-dasharray="3 5"/>
+  </g>
+  <path d="M215 173 311 106a117 117 0 0 1 21 67Z" fill="url(#sweep)"/>
+  <path d="m215 173 96-67" stroke="#6EE7B7" stroke-opacity=".53"/>
+  <g fill="#6EE7B7">
+    <circle cx="215" cy="38" r="2.5"/><circle cx="98" cy="173" r="2.5" opacity=".65"/>
+    <circle cx="332" cy="173" r="2.5" opacity=".65"/><circle cx="215" cy="308" r="2.5" opacity=".6"/>
+    <circle cx="311" cy="106" r="4"/><circle cx="311" cy="106" r="9" fill="none" stroke="#6EE7B7" stroke-opacity=".35"/>
+  </g>
+  <circle cx="130" cy="229" r="4" fill="#f87171"/>
+  <circle cx="130" cy="229" r="9" stroke="#f87171" stroke-opacity=".35"/>
+  <g stroke-linecap="round">
+    <path d="m239 208 47 47" stroke="#0d1c26" stroke-width="25"/>
+    <path d="m239 208 47 47" stroke="url(#rim)" stroke-width="15"/>
+    <path d="m255 225 31 31" stroke="#a7f3d0" stroke-opacity=".42" stroke-width="3"/>
+    <circle cx="203" cy="171" r="49" fill="url(#lens)" stroke="#0d1c26" stroke-width="15"/>
+    <circle cx="203" cy="171" r="49" stroke="url(#rim)" stroke-width="7"/>
+    <circle cx="203" cy="171" r="39" stroke="#6EE7B7" stroke-opacity=".24"/>
+    <path d="M174 160a32 32 0 0 1 20-19" stroke="#a7f3d0" stroke-width="2.5" stroke-opacity=".65"/>
+    <path d="M174 175h13l7-12 9 22 7-12h21" stroke="#6EE7B7" stroke-width="2.5" stroke-linejoin="round"/>
+  </g>
+  <path d="M311 106h17l12-12m-210 135h-19l-12 12" stroke="#6EE7B7" stroke-opacity=".4"/>
+  <g font-family="Consolas, monospace" font-size="9" letter-spacing="1.2">
+    <rect x="338" y="78" width="71" height="22" rx="5" fill="#152929" stroke="#31594e"/>
+    <text x="349" y="92" fill="#a7e8cd">SINAL 01</text>
+    <rect x="27" y="239" width="77" height="22" rx="5" fill="#26232f" stroke="#573640"/>
+    <text x="38" y="253" fill="#f4a3a3">PISTA 02</text>
+  </g>
+  <g stroke="#4a6d6d" stroke-opacity=".6"><path d="M77 82V70h12m254 0h12v12M77 263v12h12m254 0h12v-12"/></g>
+</svg>
